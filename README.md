@@ -4,5 +4,6 @@
     * R >= 4.0.5
     * RStudio >= 2021.9.03
 ## Net_Trained_With_LiDAR_Detections
-    * Google Drive
+* Requeriments:
+   * Google Drive
     
