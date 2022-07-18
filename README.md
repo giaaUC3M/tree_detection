@@ -8,7 +8,7 @@ The summary of this framework can be seen in the following image:
 
 
 
-## LiDAR_detections
+## 1. LiDAR_detections
  * Programs:
     * R == 4.0.5
     * RStudio == 2021.9.03
@@ -26,7 +26,7 @@ The **inputs** of this program are the lidar data (.laz files) captured from the
    * From package "gstat"->"gstat"    
     
     
-## Net_Trained_With_LiDAR_Detections
+## 2. Net_Trained_With_LiDAR_Detections
 * Programs:
    * Google Drive
    * QGIS Desktop == 3.22.7
