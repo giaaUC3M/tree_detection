@@ -1,0 +1,1 @@
+This folder will be used to store the files needed to relate the detections to the orthophoto pixels where they are located.

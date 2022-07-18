@@ -1,0 +1,1 @@
+Here you must enter the files containing the polygons that represent the roads and buildings of the orthophoto. They are used to clean up the detections where they have been mistaken for a tree.
