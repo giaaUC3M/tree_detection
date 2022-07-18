@@ -6,7 +6,7 @@ The summary of this framework can be seen in the following image:
 
 ![Framework Logo](/framework.svg "Framework")
 
-
+The resulting detections (.shp) can be **visualized** using QGIS tool
 
 ## 1. LiDAR_detections
  * Programs:
