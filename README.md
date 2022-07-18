@@ -4,7 +4,7 @@ This project consists of **two parts**. In the first part, tree detections of th
 The summary of this framework can be seen in the following image: 
 
 
-![Framework Logo](/framework.svg "Framework")
+![framework](https://user-images.githubusercontent.com/108266824/179526103-bdfed438-1e72-4be0-a836-08377a67b525.svg)
 
 
 ## 1. LiDAR_detections
