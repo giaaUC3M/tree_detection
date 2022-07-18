@@ -1,8 +1,13 @@
 # Automatic individual tree detection from combination of aerial imagery, LiDAR and environment context
 This project consists of two parts. In the first part, tree detections of the area of interest are obtained from lidar data. In the second part, using these detections and an orthophoto of the area of interest, we use a neural network model capable of detecting and georeferencing trees from orthophotos. 
 
-The summary of this framework can be seen in the following image:
-! [framwork] (/images/framework.svg “Framework”)
+The summary of this framework can be seen in the following image: 
+
+
+![Framework Logo](/framework.svg "Framework")
+
+
+
 ## LiDAR_detections
  * Programs:
     * R == 4.0.5
