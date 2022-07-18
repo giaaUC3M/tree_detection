@@ -1,0 +1,1 @@
+The orthophotos of the area of interest must be in this directory for the script to work correctly.
