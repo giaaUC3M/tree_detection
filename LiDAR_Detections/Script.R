@@ -2,20 +2,20 @@
 #remotes::install_github("Jean-Romain/lidRplugins")
 #library(lidRplugin)
 
-# para utilizar watershed
+# to use watershed algorithm
 install.packages("BiocManager") 
 BiocManager::install("EBImage")
 library(EBImage)
 install.packages("gstat")
 library(gstat)
 
-#Librerias necesarias
+# required libraries
 library(lidR)
 library(raster)
 library(rgdal)
 
 ####################################################################################################
-# Selecci�n de datos LiDAR a leer
+# Selection of LiDAR data to read
 ####################################################################################################
 workspace = "./"
 workspaceInput = "./LiDAR_Cloud_Points/" # Colmenarejo RGB
@@ -27,7 +27,7 @@ if (!dir.exists(workspaceOutputSHP)){
 file_list <- list.files(path=workspaceInput) # create a list of the files from your target directory
 
 ####################################################################################################
-# Selecci?n algoritmos a utilizar
+# Selection of algorithms to use
 ####################################################################################################
   # 1 = knnidw
   # 2 = kriging
@@ -54,7 +54,7 @@ for (i in seq_along(file_list)){ # 10:20){
       for (treeLocationAlgorithmUse in treeLocationAlgorithmUseValues){
         for (treeSegmentationAlgorithmUse in treeSegmentationAlgorithmUseValues){
           ####################
-          # Gesti?n de carpetas
+          # Folder management
           ####################
           nameNoExtension = strsplit(file_list[i], "\\.")[[1]]
           nameNoExtension = nameNoExtension[1]
@@ -70,33 +70,33 @@ for (i in seq_along(file_list)){ # 10:20){
           print(outputName)
           
           ####################
-          # Carga de datos LiDAR
+          # LiDAR data loading
           ####################
           fullpath = paste(workspaceInput, file_list[i], sep = "")
           lidar <- readLAS(fullpath)
           
           ####################
-          # Resumen y comprobaci?n de los datos lidar
+          # Summary and verification of lidar data
           ####################
           #las_check(lidar)
           #summary(lidar)
           
           ####################
-          # Visualizaci?n de los puntos clasificados como vegetaci?n media-alta
+          # Visualization of the points classified as medium-high vegetation
           ####################
           #las_class(lidar, Classification == 5) # No funciona??
           #plot(las_class)
           
           ####################
-          # Aplicaci?n de un filtro en los datos lidar para separar los puntos relacionados ?nicamente con suelo y vegetaci?n
+          # Application of a filter on lidar data to separate points related only to soil and vegetation
           ####################
           las2 <- readLAS(fullpath, filter="-keep_class 2 5")
           
           ####################
-          # Obtenci?n Digital Terrain Model (DTM)
-          # Normaliza la altura de los puntos
+          # Getting Digital Terrain Model (DTM)
+          # Normalizes the height of the points
           ####################
-          # Selecci?n del algoritmo
+          # Selection of algorithm
           if(dtmAlgorithmUse == 1){
             dtmAlgorithm = knnidw( 
               k=8,       # integer. Number of k-nearest neighbours. Default 10.
@@ -114,14 +114,14 @@ for (i in seq_along(file_list)){ # 10:20){
             )
           }
           
-          # Aplicaci?n del algoritmo
+          # Application of the algorithm
           dtm <- grid_terrain(las2, algorithm = dtmAlgorithm)
           las_normalized <- normalize_height(las2, dtm)
           
           ####################
-          # Obtenci?n del Canopy Height Model (CHM)
+          # Getting Canopy Height Model (CHM)
           ####################
-          # Selecci?n del algoritmo
+          # Selection of algorithm
           if(chmAlgorithmUse == 1){
             chmAlgorithm = pitfree(
               thresholds = c(0,2,5,10,15), # numeric. Set of height thresholds according to the Khosravipour et al. (2014) algorithm description (see references)
@@ -139,15 +139,15 @@ for (i in seq_along(file_list)){ # 10:20){
             )
           }
           
-          # Aplicaci?n del algoritmo
+          # Application of the algorithm
           chm <- grid_canopy(las_normalized, 0.5, chmAlgorithm)
           
-          # Visualizaci?n del CHM
+          # visualization of CHM
           #plot_dtm3d(chm)
           
           
           ####################
-          # Localizaci?n copa de los ?rboles
+          # tree canopy localization
           ####################
           if(treeLocationAlgorithmUse == 1){
             f <- function(x) { x * 0.07 + 3 }
@@ -165,16 +165,16 @@ for (i in seq_along(file_list)){ # 10:20){
             
           }
           
-          # Aplicaci?n del algoritmo
+          # Application of the algorithm
           treetops <- find_trees(las_normalized, treeLocationAlgorithm)
           
-          # PARA????
+
           ker <- matrix (1,5,5)
           chm_s <- focal(chm, w=ker, fun=median)
           
           
           ##################### 
-          # Aplicaci?n algoritmo segmentaci?n arboles
+          # Application of the tree segmentation algorithm
           ####################
           if(treeSegmentationAlgorithmUse == 1){
             treeSegmentationAlgorithm = dalponte2016(
@@ -212,22 +212,22 @@ for (i in seq_along(file_list)){ # 10:20){
             )
           }
           
-          # Aplicaci?n del algoritmo
+          # Application of the algorithm
           trees <- segment_trees(las_normalized, treeSegmentationAlgorithm)
           
-          # Visualizaci?n del resultado
+          # visualization 
           #plot(trees, color = "treeID")
           
           
           ####################
-          # Obtenci?n de bounding boxes
+          # Getting bounding boxes
           ####################
           hulls <- delineate_crowns(trees, "bbox")
           metrics <- tree_metrics(trees, attribute = "treeID")
           plot(hulls)
           
           ####################
-          # Escritura de CSV/SHP
+          # write CSV/SHP
           ####################
           writeOGR(
             obj    = hulls,
