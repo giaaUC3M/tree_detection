@@ -60,4 +60,4 @@ All information on the **neural network architecture** used for training the tre
 ## Execution tutorial
 
 
-[![Watch the video](https://img.youtube.com/vi/T7FUJiChTsU/maxresdefault.jpg)](https://www.youtube.com/watch?v=T7FUJiChTsU))
+[![Watch the video](https://img.youtube.com/vi/T7FUJiChTsU/maxresdefault.jpg)](https://www.youtube.com/watch?v=T7FUJiChTsU)
