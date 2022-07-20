@@ -56,4 +56,8 @@ All information on the **neural network architecture** used for training the tre
    * -U kaleido
    * pyyaml==5.4.1
 
-https://youtu.be/T7FUJiChTsU
+
+## Execution tutorial
+
+
+[![Watch the video](https://img.youtube.com/vi/T7FUJiChTsU/maxresdefault.jpg)](https://www.youtube.com/watch?v=T7FUJiChTsU))
